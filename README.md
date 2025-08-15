@@ -136,7 +136,7 @@ Full-Stack Developer | Next.js | Prisma
 
 📧 Email: [talhatoffe7@gmail.com](mailto:talhatoffe7@gmail.com)  
 🔗 LinkedIn: [https://www.linkedin.com/in/talha-asif7/](https://www.linkedin.com/in/talha-asif7/)  
-💻 GitHub: *add your GitHub link*
+
 
 ---
 
