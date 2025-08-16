@@ -5,23 +5,36 @@ import * as SignIn from "@clerk/elements/sign-in";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, KeyboardEvent } from "react";
 
 const LoginPage = () => {
   const { isLoaded, isSignedIn, user } = useUser();
-
   const router = useRouter();
+
+  // Handle Enter press
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      // This triggers the sign-in button click programmatically
+      const submitButton = document.querySelector(
+        '[data-element="sign-in-button"]'
+      ) as HTMLButtonElement | null;
+      submitButton?.click();
+    }
+  };
 
   useEffect(() => {
     const role = user?.publicMetadata.role;
-
     if (role) {
       router.push(`/${role}`);
     }
   }, [user, router]);
 
   return (
-    <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
+    <div
+      className="h-screen flex items-center justify-center bg-lamaSkyLight"
+      onKeyDown={handleKeyDown}
+    >
       <SignIn.Root>
         <SignIn.Step
           name="start"
@@ -58,6 +71,7 @@ const LoginPage = () => {
           <SignIn.Action
             submit
             className="bg-blue-500 text-white my-1 rounded-md text-sm p-[10px]"
+            data-element="sign-in-button" // <-- add data attribute for query
           >
             Sign In
           </SignIn.Action>
